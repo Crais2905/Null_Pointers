@@ -29,7 +29,7 @@ public class WebhookSink implements TaskSink {
         this.json = json;
         this.url = url;
         this.timeout = Duration.ofMillis(Math.max(1, timeoutMs));
-        this.client = HttpClient.newBuilder().connectTimeout(timeout).followRedirects(HttpClient.Redirect.NEVER).build();
+        this.client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).connectTimeout(timeout).followRedirects(HttpClient.Redirect.NEVER).build();
     }
 
     public String deliver(Long id) {

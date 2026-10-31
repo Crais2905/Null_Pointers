@@ -10,6 +10,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 
 /** Java-клієнт сервісу Python AI. Повторює лише помилки мережі та HTTP 5xx, один раз. */
@@ -23,7 +24,10 @@ public class AiClient {
                     @Value("${fixer.ai.timeout-ms:30000}") int timeoutMs,
                     ObjectMapper mapper) {
         this.endpoint = baseUrl.replaceAll("/+$", "") + "/ai/analyze-log";
-        this.http = HttpClient.newBuilder().connectTimeout(Duration.ofMillis(Math.max(1, timeoutMs))).build();
+        this.http = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_1_1)
+                .connectTimeout(Duration.ofMillis(Math.max(1, timeoutMs)))
+                .build();
         this.mapper = mapper;
         this.timeoutMs = Math.max(1, timeoutMs);
     }
@@ -38,19 +42,20 @@ public class AiClient {
 
         for (int attempt = 0; attempt < 2; attempt++) {
             HttpRequest httpRequest = HttpRequest.newBuilder(URI.create(endpoint))
+                    .version(HttpClient.Version.HTTP_1_1)
                     .timeout(Duration.ofMillis(timeoutMs))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(body))
+                    .header("Content-Type", "application/json; charset=utf-8")
+                    .POST(HttpRequest.BodyPublishers.ofString(body, StandardCharsets.UTF_8))
                     .build();
             try {
-                HttpResponse<String> response = http.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+                HttpResponse<String> response = http.send(httpRequest, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
                 int status = response.statusCode();
                 if (status >= 200 && status < 300) {
                     JsonNode result = mapper.readTree(response.body());
                     if (result == null || !result.isObject()) throw new AiClientException("AI returned an empty or non-object response");
                     return result;
                 }
-                AiClientException error = new AiClientException("AI service returned HTTP " + status);
+                AiClientException error = new AiClientException("AI service returned HTTP " + status + ": " + response.body());
                 if (status < 500 || attempt == 1) throw error;
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();

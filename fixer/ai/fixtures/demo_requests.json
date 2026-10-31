@@ -31,7 +31,7 @@
       {
         "id": "promo",
         "name": "Промокоди",
-        "description": "PromoService",
+        "description": "PromoService, застосування знижок",
         "keywords": [
           "promo",
           "discount",
@@ -92,7 +92,7 @@
       {
         "id": "promo",
         "name": "Промокоди",
-        "description": "PromoService",
+        "description": "PromoService, застосування знижок",
         "keywords": [
           "promo",
           "discount",
@@ -153,7 +153,7 @@
       {
         "id": "promo",
         "name": "Промокоди",
-        "description": "PromoService",
+        "description": "PromoService, застосування знижок",
         "keywords": [
           "promo",
           "discount",
@@ -214,7 +214,7 @@
       {
         "id": "promo",
         "name": "Промокоди",
-        "description": "PromoService",
+        "description": "PromoService, застосування знижок",
         "keywords": [
           "promo",
           "discount",
@@ -275,7 +275,7 @@
       {
         "id": "promo",
         "name": "Промокоди",
-        "description": "PromoService",
+        "description": "PromoService, застосування знижок",
         "keywords": [
           "promo",
           "discount",
