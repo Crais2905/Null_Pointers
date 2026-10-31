@@ -30,18 +30,6 @@ public class ScaffoldController {
         return Map.of("status", "ok", "mode", "scaffold");
     }
 
-    @GetMapping("/incidents")
-    public List<JsonNode> incidents() throws IOException {
-        return json.convertValue(load("fixtures/api-incident-list.json", json), new com.fasterxml.jackson.core.type.TypeReference<List<JsonNode>>() {
-        });
-    }
-
-    @GetMapping("/incidents/{id}")
-    public JsonNode incident(@PathVariable long id) throws IOException {
-        if (id != 12) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        return load("fixtures/api-incident.json", json);
-    }
-
     @GetMapping("/developers")
     public JsonNode developers() throws IOException {
         var list = load("seed/developers.yml", new ObjectMapper(new YAMLFactory())).get("developers");
@@ -73,7 +61,7 @@ public class ScaffoldController {
         return Map.of("autoDispatch", true);
     }
 
-    @RequestMapping(value = {"/incidents", "/incidents/simulate", "/incidents/{id}/confirm", "/incidents/{id}/dismiss", "/reset"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/incidents/{id}/confirm", "/incidents/{id}/dismiss", "/reset"}, method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.NOT_IMPLEMENTED)
     public Map<String, String> pending() {
         return Map.of("code", "NOT_IMPLEMENTED", "message", "Scaffold: implement pipeline and persistence");
