@@ -10,3 +10,4 @@ __pycache__/
 .idea/
 *.zip
 # Seed .log files are committed; do not ignore *.log globally.
+.build/

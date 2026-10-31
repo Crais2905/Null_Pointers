@@ -1,1 +1,1 @@
-Микола: реальні avgPipelineSec, autoDispatchedPercent, dedupMerged, total. Не брати цифри з фікстур.
+MetricsService.snapshot() рахує фактичні дані БД. Manual dispatch не зараховується в autoDispatchedPercent.

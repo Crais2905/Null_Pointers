@@ -36,7 +36,7 @@ AI кеш тепер усередині ai/, тому образ не залеж
 - П’ять demo logs по 60 рядків, синхронізація AI fixtures, перевірка реальних цитат у контракті.
 
 ## Що команда реалізує
-БД/JPA, сідер, parser/masking/detectors/LLM, routing/evidence/policy/pipeline, dedup, dispatch, реальні metrics, UI-компоненти. Write endpoints поки 501, щоб не імітувати успішну роботу. Лише DUP_CHARGE має синтетичний replay; інші очікувані результати описані в ТЗ й потребують реалізації.
+Parser/masking/detectors/LLM, routing/evidence/policy/pipeline, REST integration та UI-компоненти. Data/JPA, seed/reset, atomic task dedup/dispatch, adapters і metrics вже реалізовані Миколою. Write endpoints поки 501, щоб не імітувати успішну роботу. Лише DUP_CHARGE має синтетичний replay; інші очікувані результати описані в ТЗ й потребують реалізації.
 Модель у .env.example взята з ТЗ; її доступність треба перевірити під час підключення реального провайдера.
 Ролі й перші кроки: docs/team.md. Спільні payload: contracts/README.md. Рішення для інтеграції зафіксовано в contracts/DECISIONS.md; Java interfaces у data/port/. Починайте реалізацію за ними.
 
@@ -44,9 +44,12 @@ AI кеш тепер усередині ai/, тому образ не залеж
 `./scripts/dev.ps1 test` — перевірка scaffold, Maven, pytest, TypeScript + Vite build.
 `python scripts/check_scaffold.py` — без зовнішніх залежностей: JSON, Python syntax, evidence, replay, однакові seed logs.
 `./scripts/dev.ps1 seed` — синхронізує логи; це не reset БД. API reset реалізує команда.
-Java і Python бізнес-тести-заглушки явно disabled/skipped. Реальні початкові Python тести перевіряють схеми, межі confidence, точне replay.
+Java pipeline/router/policy і Python бізнес-тести-заглушки явно disabled/skipped; data-dispatch інтеграційні тести реалізовані. Реальні початкові Python тести перевіряють схеми, межі confidence, точне replay.
 
 ## Git
 Git-корінь — D:\hack1, код — fixer/. Кожен створює свою feature-гілку від свіжого main; PR у main.
 Гілки: feature/frontend, feature/data-dispatch, feature/pipeline-api, feature/ai-engine.
 CODEOWNERS — шаблон без реальних handles: заповніть після узгодження GitHub-імен.
+
+## Реалізація data-dispatch
+Частина Миколи реалізована в backend: JPA, seed/reset, log storage, atomic task dispatch/dedup, adapters, Markdown, metrics. Інтеграція зі Славіком: docs/mykola-handoff.md. Read-only ScaffoldController ще не підключений до цих сервісів; його замінює API-гілка.

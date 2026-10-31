@@ -35,3 +35,8 @@ LogStorage.save повертає SHA-256 UTF-8 оригінального тек
 Transport upload limit 10 MiB → 413; від 5 до 10 MiB аналізується префікс до 5 MiB з попередженням, без розриву UTF-8 символу. Кількість analyzed lines у parsed.lines_total; UI logLines — оригінальна кількість.
 Admission dedup: однаковий log_hash + точний userMessage за останні 10 хв → наявний incident, без нового прогону.
 avgPipelineSec — середнє pipeline_ms серед завершених прогонів з виміряним часом; total — усі incidents; autoDispatchedPercent = AUTO_DISPATCHED / total * 100; dedupMerged — кількість DEDUPLICATED incidents. При total=0 значення 0. Фікстурні таймінги не є вимірюваннями.
+
+## Уточнення реалізації data-dispatch
+Для успішного ручного підтвердження використовується той самий термінальний incident.status=AUTO_DISPATCHED (окремого DISPATCHED у затвердженому enum немає), але dispatch actor=HUMAN. Автоматичний шлях має actor=SYSTEM. Метрика autoDispatchedPercent враховує лише SYSTEM; повтори й ручні підтвердження не зараховуються як авто.
+IncidentStore має additive методи list(), saveStages(), recordPipelineDuration(); TaskStore — list(assigneeId), setStatus(id,status). При saveAnalysis verifiedDiagnosis передається у зовнішньому camelCase; raw aiResponse — snake_case. TaskStore.dispatch одночасно створює Inbox/audit і фіналізує incident, тож не ставити фінальний статус через updateStatus перед dispatch.
+TaskSink.deliver лише після commit нового task. Webhook передає безпечні task id/priority/assignee/Markdown path замість повного raw model prose. За падіння процесу після DB claim повторна зовнішня відправка не виконується (at-most-once спроба, обмеження MVP).
