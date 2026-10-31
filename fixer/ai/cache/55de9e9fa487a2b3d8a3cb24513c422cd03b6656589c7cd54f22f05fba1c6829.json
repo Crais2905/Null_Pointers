@@ -1,0 +1,41 @@
+{
+  "output": {
+    "diagnosis": {
+      "category": "UNHANDLED_EXCEPTION",
+      "severity": "P2",
+      "confidence": 0.9,
+      "root_cause": "NullPointerException у PromoService.apply під час застосування промокоду.",
+      "suspected_module_id": "promo",
+      "required_skills": [
+        "java",
+        "spring"
+      ],
+      "user_impact": "Промокод WELCOME10 не застосовується, пише помилку",
+      "evidence": [
+        {
+          "line": 3,
+          "quote": "java.lang.NullPointerException: Cannot invoke \"Promo.getValidFrom()\" because \"promo\" is null",
+          "why": "Підтвердження сигналу в логу"
+        },
+        {
+          "line": 4,
+          "quote": "\tat com.yummi.promo.PromoService.apply(PromoService.java:88)",
+          "why": "Підтвердження сигналу в логу"
+        }
+      ],
+      "repro_steps": [
+        "Повторити операцію з логу у тестовому середовищі"
+      ],
+      "suggested_fix": "Перевірити обробку цієї помилки в указаному модулі.",
+      "unknowns": []
+    },
+    "task_draft": {
+      "title": "[promo] UNHANDLED_EXCEPTION",
+      "description_md": "## Контекст\nПромокод WELCOME10 не застосовується, пише помилку\n\n## Що сталося\nNullPointerException у PromoService.apply під час застосування промокоду.\n\n## Докази\nРядок 3: java.lang.NullPointerException: Cannot invoke \"Promo.getValidFrom()\" because \"promo\" is null\nРядок 4: \tat com.yummi.promo.PromoService.apply(PromoService.java:88)\n\n## Кроки відтворення\nПовторити операцію у тестовому середовищі\n\n## Підозра\npromo\n\n## Пропозиція виправлення\nПеревірити обробку цієї помилки в указаному модулі.\n\n## Критерії приймання\nРегресійний сценарій проходить\nПомилку оброблено та зафіксовано в логу",
+      "acceptance_criteria": [
+        "Регресійний сценарій проходить",
+        "Помилку оброблено та зафіксовано в логу"
+      ]
+    }
+  }
+}

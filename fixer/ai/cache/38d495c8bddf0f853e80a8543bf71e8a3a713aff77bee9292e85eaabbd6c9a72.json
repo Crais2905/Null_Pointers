@@ -1,0 +1,42 @@
+{
+  "output": {
+    "diagnosis": {
+      "category": "PAYMENT_DUPLICATE",
+      "severity": "P1",
+      "confidence": 0.88,
+      "root_cause": "Повторний успішний запит оплати для одного замовлення.",
+      "suspected_module_id": "payments",
+      "required_skills": [
+        "java",
+        "payments",
+        "idempotency"
+      ],
+      "user_impact": "З картки зняли гроші двічі за замовлення 402",
+      "evidence": [
+        {
+          "line": 4,
+          "quote": "2026-10-31T13:10:12.420Z INFO  [payment-service] trace=t201 request_id=d9 POST /api/pay order=402 -> 200 charged tx=TX-8 amount=340",
+          "why": "Підтвердження сигналу в логу"
+        },
+        {
+          "line": 6,
+          "quote": "2026-10-31T12:40:05.000Z INFO [health-service] healthcheck ok",
+          "why": "Підтвердження сигналу в логу"
+        }
+      ],
+      "repro_steps": [
+        "Повторити операцію з логу у тестовому середовищі"
+      ],
+      "suggested_fix": "Перевірити обробку цієї помилки в указаному модулі.",
+      "unknowns": []
+    },
+    "task_draft": {
+      "title": "[payments] PAYMENT_DUPLICATE",
+      "description_md": "## Контекст\nЗ картки зняли гроші двічі за замовлення 402\n\n## Що сталося\nПовторний успішний запит оплати для одного замовлення.\n\n## Докази\nРядок 4: 2026-10-31T13:10:12.420Z INFO  [payment-service] trace=t201 request_id=d9 POST /api/pay order=402 -> 200 charged tx=TX-8 amount=340\nРядок 6: 2026-10-31T12:40:05.000Z INFO [health-service] healthcheck ok\n\n## Кроки відтворення\nПовторити операцію у тестовому середовищі\n\n## Підозра\npayments\n\n## Пропозиція виправлення\nПеревірити обробку цієї помилки в указаному модулі.\n\n## Критерії приймання\nРегресійний сценарій проходить\nПомилку оброблено та зафіксовано в логу",
+      "acceptance_criteria": [
+        "Регресійний сценарій проходить",
+        "Помилку оброблено та зафіксовано в логу"
+      ]
+    }
+  }
+}
