@@ -18,6 +18,9 @@ public interface IncidentStore {
 
     Optional<JsonNode> find(long id);
 
+    /** Internal dispatch key; never include it in the public incident DTO. */
+    Optional<String> fingerprint(long id);
+
     java.util.List<JsonNode> list();
 
     void saveStages(long id, JsonNode stages);
