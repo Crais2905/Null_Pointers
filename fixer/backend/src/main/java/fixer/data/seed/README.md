@@ -1,1 +1,1 @@
-Микола: DataSeeder з YAML і demo reset. Логи у resources/seed/logs — єдине джерело.
+DataSeeder і SeedCatalog реалізовано. YAML/JSON/log ресурси — єдине джерело seed. Reset викликається через IncidentStore.resetDemo().

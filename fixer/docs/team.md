@@ -2,7 +2,7 @@
 | Учасник | Папки | Перша задача |
 |---|---|---|
 | Олег | web/, docs/ | Зібрати екран інциденту з mocks; далі Inbox, Team, polling |
-| Микола | backend/.../data, dispatch, metrics; resources/seed | JPA і repo для incidents/dev_tasks/developers/audit_logs/settings, DataSeeder, LogStorage, TaskSink adapters, Markdown, реальні метрики |
+| Микола | backend/.../data, dispatch, metrics; resources/seed | Реалізовано: JPA/repos, seed/reset, logs, atomic tasks, adapters, Markdown, metrics. Див. docs/mykola-handoff.md |
 | В’ячеслав | backend/.../api, pipeline, evidence, routing, policy, ai, audit; Java tests | DTO, EvidenceVerifier, Router, R1–R6, fingerprint, дедуп, IncidentPipeline, AiClient |
 | Святослав | ai/ | Маскування PII, parser, D1–D7, evidence pack, diagnose, replay, pytest |
 

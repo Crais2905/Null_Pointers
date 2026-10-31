@@ -9,5 +9,7 @@ public interface TaskStore {
  Optional<JsonNode> findOpenByFingerprint(String fingerprint);
  Optional<JsonNode> find(long taskId);
  long countOpen(String developerId);
+ java.util.List<JsonNode> list(String assigneeId);
+ JsonNode setStatus(long taskId, String status);
  void updateDelivery(long taskId, String status, String error);
 }
