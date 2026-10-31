@@ -1,0 +1,76 @@
+{
+  "parsed": {
+    "lines_total": 60,
+    "time_range": [
+      "2026-10-31T12:29:58.101Z",
+      "2026-10-31T12:40:59.000Z"
+    ],
+    "services": [
+      "api-gateway",
+      "payment-service",
+      "notification-service",
+      "health-service"
+    ],
+    "levels": {
+      "INFO": 59,
+      "WARN": 1
+    },
+    "truncated": false,
+    "masked": {}
+  },
+  "findings": [
+    {
+      "detector": "D1",
+      "line_numbers": [
+        4,
+        6
+      ],
+      "excerpt": "POST /api/pay order=318 -> 200",
+      "note": "два успішні POST за 0.9 с"
+    }
+  ],
+  "signature": "dup_request POST /api/pay",
+  "diagnosis": {
+    "category": "PAYMENT_DUPLICATE",
+    "severity": "P1",
+    "confidence": 0.88,
+    "root_cause": "PaymentController приймає повторний POST /api/pay без ключа ідемпотентності",
+    "suspected_module_id": "payments",
+    "required_skills": [
+      "java",
+      "payments",
+      "idempotency"
+    ],
+    "user_impact": "Клієнт отримав подвійне списання",
+    "evidence": [
+      {
+        "line": 4,
+        "quote": "trace=t101 request_id=a1 POST /api/pay order=318 -> 200 charged tx=TX-1 amount=289",
+        "why": "перше успішне списання"
+      },
+      {
+        "line": 6,
+        "quote": "trace=t102 request_id=b7 POST /api/pay order=318 -> 200 charged tx=TX-2 amount=289",
+        "why": "друге списання через 0.9 с"
+      }
+    ],
+    "repro_steps": [
+      "Двічі швидко надіслати POST /api/pay для одного order_id"
+    ],
+    "suggested_fix": "Додати X-Idempotency-Key і унікальне обмеження в БД",
+    "unknowns": []
+  },
+  "task_draft": {
+    "title": "[payments] Захистити POST /api/pay від повторного списання",
+    "description_md": "## Що сталося\n...",
+    "acceptance_criteria": [
+      "Повторний POST з тим самим ключем повертає перший результат і не створює другого платежу",
+      "Два одночасні запити з одним ключем створюють один платіж"
+    ]
+  },
+  "timings_ms": {
+    "parse": 0,
+    "detectors": 0,
+    "llm": 0
+  }
+}

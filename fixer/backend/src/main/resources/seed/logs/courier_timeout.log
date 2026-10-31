@@ -1,0 +1,60 @@
+2026-10-31T15:20:01.000Z INFO  [order-service] trace=t400 order=501 status=PROCESSING requesting courier
+2026-10-31T15:20:06.010Z WARN  [courier-client] trace=t400 order=501 connect timeout to courier-api.partner.example attempt=1
+2026-10-31T15:20:16.020Z WARN  [courier-client] trace=t400 order=501 connect timeout to courier-api.partner.example attempt=2
+2026-10-31T15:20:36.030Z WARN  [courier-client] trace=t400 order=501 connect timeout to courier-api.partner.example attempt=3
+2026-10-31T15:21:16.040Z ERROR [courier-client] trace=t400 order=501 courier-api.partner.example returned 503 after 3 retries
+2026-10-31T15:21:16.050Z ERROR [order-service] trace=t400 order=501 courier not assigned, stays PROCESSING
+2026-10-31T15:24:01.000Z ERROR [courier-client] trace=t405 order=507 courier-api.partner.example returned 503
+2026-10-31T12:40:07.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:08.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:09.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:10.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:11.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:12.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:13.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:14.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:15.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:16.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:17.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:18.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:19.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:20.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:21.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:22.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:23.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:24.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:25.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:26.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:27.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:28.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:29.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:30.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:31.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:32.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:33.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:34.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:35.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:36.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:37.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:38.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:39.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:40.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:41.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:42.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:43.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:44.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:45.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:46.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:47.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:48.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:49.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:50.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:51.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:52.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:53.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:54.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:55.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:56.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:57.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:58.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:59.000Z INFO [health-service] healthcheck ok

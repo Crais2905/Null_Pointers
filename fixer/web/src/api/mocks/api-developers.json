@@ -1,0 +1,87 @@
+[
+  {
+    "id": "dev-1",
+    "name": "Андрій Коваль",
+    "role": "BACKEND",
+    "available": true,
+    "handle": "",
+    "skills": [
+      "java",
+      "spring",
+      "payments",
+      "idempotency",
+      "sql"
+    ],
+    "ownedModules": [
+      {
+        "id": "payments",
+        "level": "primary"
+      }
+    ]
+  },
+  {
+    "id": "dev-2",
+    "name": "Марія Шевчук",
+    "role": "BACKEND",
+    "available": true,
+    "handle": "",
+    "skills": [
+      "java",
+      "spring",
+      "sql",
+      "caching"
+    ],
+    "ownedModules": [
+      {
+        "id": "orders",
+        "level": "primary"
+      },
+      {
+        "id": "promo",
+        "level": "primary"
+      },
+      {
+        "id": "payments",
+        "level": "secondary"
+      }
+    ]
+  },
+  {
+    "id": "dev-3",
+    "name": "Тарас Бойко",
+    "role": "FRONTEND",
+    "available": true,
+    "handle": "",
+    "skills": [
+      "react",
+      "css",
+      "ux-states"
+    ],
+    "ownedModules": [
+      {
+        "id": "web-checkout",
+        "level": "primary"
+      }
+    ]
+  },
+  {
+    "id": "dev-4",
+    "name": "Олена Мельник",
+    "role": "DEVOPS",
+    "available": true,
+    "handle": "",
+    "skills": [
+      "devops",
+      "kubernetes",
+      "network",
+      "timeouts",
+      "observability"
+    ],
+    "ownedModules": [
+      {
+        "id": "courier-integration",
+        "level": "primary"
+      }
+    ]
+  }
+]

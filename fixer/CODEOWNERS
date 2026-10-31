@@ -1,0 +1,16 @@
+# Template only: fill actual GitHub handles; paths are relative to git root D:/hack1
+# /fixer/web/ @oleh
+# /fixer/docs/ @oleh
+# /fixer/backend/src/main/java/fixer/data/ @mykola
+# /fixer/backend/src/main/java/fixer/dispatch/ @mykola
+# /fixer/backend/src/main/java/fixer/metrics/ @mykola
+# /fixer/backend/src/main/resources/seed/ @mykola
+# /fixer/backend/src/main/java/fixer/api/ @viacheslav
+# /fixer/backend/src/main/java/fixer/pipeline/ @viacheslav
+# /fixer/backend/src/main/java/fixer/evidence/ @viacheslav
+# /fixer/backend/src/main/java/fixer/routing/ @viacheslav
+# /fixer/backend/src/main/java/fixer/policy/ @viacheslav
+# /fixer/backend/src/main/java/fixer/ai/ @viacheslav
+# /fixer/backend/src/main/java/fixer/audit/ @viacheslav
+# /fixer/ai/ @sviatoslav
+# /fixer/contracts/ @oleh @mykola @viacheslav @sviatoslav

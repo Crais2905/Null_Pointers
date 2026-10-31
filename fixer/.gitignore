@@ -1,0 +1,12 @@
+node_modules/
+dist/
+target/
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+.env
+.env.local
+.idea/
+*.zip
+# Seed .log files are committed; do not ignore *.log globally.

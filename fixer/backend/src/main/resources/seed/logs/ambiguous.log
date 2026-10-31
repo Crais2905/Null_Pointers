@@ -1,0 +1,60 @@
+2026-10-31T16:00:01.100Z INFO  [api-gateway] trace=t500 GET /api/menu -> 200 (1420ms)
+2026-10-31T16:00:05.200Z WARN  [api-gateway] trace=t501 GET /api/orders -> 200 (2210ms) slow response
+2026-10-31T16:00:09.300Z INFO  [api-gateway] trace=t502 GET /api/menu -> 200 (980ms)
+2026-10-31T16:00:14.400Z WARN  [api-gateway] trace=t503 GET /api/orders -> 200 (1890ms) slow response
+2026-10-31T16:00:20.500Z INFO  [api-gateway] trace=t504 GET /api/profile -> 200 (1100ms)
+2026-10-31T12:40:05.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:06.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:07.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:08.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:09.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:10.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:11.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:12.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:13.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:14.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:15.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:16.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:17.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:18.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:19.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:20.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:21.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:22.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:23.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:24.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:25.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:26.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:27.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:28.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:29.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:30.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:31.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:32.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:33.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:34.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:35.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:36.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:37.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:38.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:39.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:40.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:41.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:42.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:43.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:44.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:45.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:46.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:47.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:48.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:49.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:50.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:51.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:52.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:53.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:54.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:55.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:56.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:57.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:58.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:59.000Z INFO [health-service] healthcheck ok

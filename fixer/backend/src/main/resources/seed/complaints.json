@@ -1,0 +1,7 @@
+{
+  "DUP_CHARGE": {"userMessage": "Мене списали двічі за замовлення 318, поверніть гроші", "orderId": 318, "userId": 77},
+  "DUP_CHARGE_AGAIN": {"userMessage": "З картки зняли гроші двічі за замовлення 402", "orderId": 402, "userId": 91},
+  "PROMO_NPE": {"userMessage": "Промокод WELCOME10 не застосовується, пише помилку", "orderId": 455, "userId": 12},
+  "COURIER_TIMEOUT": {"userMessage": "Замовлення 501 висить більше години, кур'єра немає", "orderId": 501, "userId": 33},
+  "AMBIGUOUS": {"userMessage": "Додаток працює повільно", "orderId": null, "userId": 58}
+}

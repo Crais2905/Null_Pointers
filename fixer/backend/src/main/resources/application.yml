@@ -1,0 +1,23 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:h2:mem:fixer;DB_CLOSE_DELAY=-1
+  jpa:
+    hibernate:
+      ddl-auto: create
+fixer:
+  ai:
+    base-url: ${AI_BASE_URL:http://localhost:8000}
+    timeout-ms: 30000
+    retries: 1
+  policy:
+    triage-below: 0.5
+    auto-from: 0.75
+    competent-score: 40
+    single-evidence-cap: 0.7
+    no-module-cap: 0.5
+  dispatch:
+    webhook-url: ${DISPATCH_WEBHOOK_URL:}
+  log:
+    max-lines: 20000

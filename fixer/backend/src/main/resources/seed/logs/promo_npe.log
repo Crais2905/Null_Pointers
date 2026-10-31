@@ -1,0 +1,60 @@
+2026-10-31T14:02:10.100Z INFO  [promo-service] trace=t300 order=455 user=12 apply promo code=WELCOME10
+2026-10-31T14:02:10.130Z ERROR [promo-service] trace=t300 Unhandled exception while applying promo
+java.lang.NullPointerException: Cannot invoke "Promo.getValidFrom()" because "promo" is null
+	at com.yummi.promo.PromoService.apply(PromoService.java:88)
+	at com.yummi.promo.PromoController.apply(PromoController.java:41)
+	at jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+2026-10-31T14:02:40.200Z INFO  [promo-service] trace=t301 order=460 user=14 apply promo code=WELCOME10
+2026-10-31T14:02:40.220Z ERROR [promo-service] trace=t301 Unhandled exception while applying promo
+java.lang.NullPointerException: Cannot invoke "Promo.getValidFrom()" because "promo" is null
+	at com.yummi.promo.PromoService.apply(PromoService.java:88)
+	at com.yummi.promo.PromoController.apply(PromoController.java:41)
+2026-10-31T14:03:12.400Z INFO  [promo-service] trace=t302 order=463 user=19 apply promo code=WELCOME10
+2026-10-31T14:03:12.415Z ERROR [promo-service] trace=t302 Unhandled exception while applying promo
+java.lang.NullPointerException: Cannot invoke "Promo.getValidFrom()" because "promo" is null
+	at com.yummi.promo.PromoService.apply(PromoService.java:88)
+2026-10-31T12:40:15.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:16.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:17.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:18.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:19.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:20.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:21.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:22.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:23.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:24.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:25.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:26.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:27.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:28.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:29.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:30.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:31.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:32.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:33.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:34.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:35.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:36.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:37.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:38.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:39.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:40.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:41.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:42.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:43.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:44.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:45.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:46.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:47.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:48.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:49.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:50.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:51.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:52.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:53.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:54.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:55.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:56.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:57.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:58.000Z INFO [health-service] healthcheck ok
+2026-10-31T12:40:59.000Z INFO [health-service] healthcheck ok

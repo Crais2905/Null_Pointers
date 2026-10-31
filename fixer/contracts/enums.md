@@ -1,0 +1,11 @@
+# Enum-и
+- category: PAYMENT_DUPLICATE | UNHANDLED_EXCEPTION | UPSTREAM_TIMEOUT | AUTH_FAILURE | DATA_INCONSISTENCY | CONFIG_ERROR | UNKNOWN
+- severity: P1 | P2 | P3
+- incident.status: NEW | ANALYZING | DIAGNOSED | AUTO_DISPATCHED | PENDING_CONFIRM | NEEDS_TRIAGE | DEDUPLICATED | DISMISSED | FAILED
+- task.status: OPEN | ACK | DONE
+- delivery_status: IN_APP | WEBHOOK_OK | WEBHOOK_FAILED
+- actor: SYSTEM | AI | HUMAN
+- detectors: D1 duplicate_request, D2 error_burst, D3 retry_storm, D4 upstream_failure, D5 exception_trace, D6 auth_failure, D7 correlation
+- policy: R1 triage (0 доказів / UNKNOWN / conf<0.5), R2 dedup, R3 no owner (score<40), R4 0.5<=conf<0.75 confirm, R5 conf>=0.75 + autoDispatch auto, R6 conf>=0.75 + autoDispatch off confirm
+- scenario: DUP_CHARGE | PROMO_NPE | COURIER_TIMEOUT | DUP_CHARGE_AGAIN | AMBIGUOUS
+- required_skills: java, spring, sql, payments, idempotency, caching, auth, react, css, ux-states, devops, kubernetes, network, timeouts, observability

@@ -1,0 +1,14 @@
+# Імена вигадані для демо — замінити реальним списком команди
+developers:
+  - {id: dev-1, name: Андрій Коваль, role: BACKEND, available: true, handle: "@akoval",
+     owned_modules: [{id: payments, level: primary}],
+     skills: [java, spring, payments, idempotency, sql]}
+  - {id: dev-2, name: Марія Шевчук, role: BACKEND, available: true, handle: "@mshevchuk",
+     owned_modules: [{id: orders, level: primary}, {id: promo, level: primary}, {id: payments, level: secondary}],
+     skills: [java, spring, sql, caching]}
+  - {id: dev-3, name: Тарас Бойко, role: FRONTEND, available: true, handle: "@tboyko",
+     owned_modules: [{id: web-checkout, level: primary}],
+     skills: [react, css, ux-states]}
+  - {id: dev-4, name: Олена Мельник, role: DEVOPS, available: true, handle: "@omelnyk",
+     owned_modules: [{id: courier-integration, level: primary}],
+     skills: [devops, kubernetes, network, timeouts, observability]}
