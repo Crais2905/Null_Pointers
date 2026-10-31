@@ -1,0 +1,307 @@
+{
+  "DUP_CHARGE": {
+    "incident_id": 1,
+    "user_message": "Мене списали двічі за замовлення 318, поверніть гроші",
+    "order_id": 318,
+    "user_id": 77,
+    "log_text": "2026-10-31T12:29:58.101Z INFO  [api-gateway] trace=t100 GET /api/orders/318 -> 200 (18ms)\n2026-10-31T12:30:00.340Z INFO  [payment-service] trace=t101 order=318 user=77 checkout started amount=289\n2026-10-31T12:30:01.120Z INFO  [api-gateway] trace=t101 request_id=a1 POST /api/pay order=318 user=77\n2026-10-31T12:30:01.410Z INFO  [payment-service] trace=t101 request_id=a1 POST /api/pay order=318 -> 200 charged tx=TX-1 amount=289\n2026-10-31T12:30:02.020Z INFO  [api-gateway] trace=t102 request_id=b7 POST /api/pay order=318 user=77\n2026-10-31T12:30:02.310Z INFO  [payment-service] trace=t102 request_id=b7 POST /api/pay order=318 -> 200 charged tx=TX-2 amount=289\n2026-10-31T12:30:02.315Z WARN  [payment-service] trace=t102 order=318 header X-Idempotency-Key missing\n2026-10-31T12:30:03.900Z INFO  [notification-service] trace=t101 order=318 email=a***@example.com sent receipt tx=TX-1\n2026-10-31T12:30:04.100Z INFO  [notification-service] trace=t102 order=318 email=a***@example.com sent receipt tx=TX-2\n2026-10-31T12:30:09.500Z INFO  [api-gateway] trace=t103 GET /api/orders/320 -> 200 (21ms)\n2026-10-31T12:40:10.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:11.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:12.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:13.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:14.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:15.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:16.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:17.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:18.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:19.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:20.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:21.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:22.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:23.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:24.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:25.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:26.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:27.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:28.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:29.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:30.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:31.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:32.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:33.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:34.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:35.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:36.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:37.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:38.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:39.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:40.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:41.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:42.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:43.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:44.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:45.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:46.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:47.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:48.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:49.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:50.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:51.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:52.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:53.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:54.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:55.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:56.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:57.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:58.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:59.000Z INFO [health-service] healthcheck ok\n",
+    "module_catalog": [
+      {
+        "id": "payments",
+        "name": "Платежі",
+        "description": "PaymentController і шлюз оплати",
+        "keywords": [
+          "pay",
+          "charge",
+          "refund",
+          "gateway",
+          "idempotency"
+        ]
+      },
+      {
+        "id": "orders",
+        "name": "Замовлення",
+        "description": "Статуси й життєвий цикл замовлень",
+        "keywords": [
+          "order",
+          "status",
+          "processing"
+        ]
+      },
+      {
+        "id": "promo",
+        "name": "Промокоди",
+        "description": "PromoService",
+        "keywords": [
+          "promo",
+          "discount",
+          "coupon"
+        ]
+      },
+      {
+        "id": "courier-integration",
+        "name": "Інтеграція з кур'єрами",
+        "description": "Зовнішнє API кур'єрської служби",
+        "keywords": [
+          "courier",
+          "dispatch",
+          "timeout"
+        ]
+      },
+      {
+        "id": "web-checkout",
+        "name": "Оформлення замовлення (фронт)",
+        "description": "Екран оформлення й оплати",
+        "keywords": [
+          "checkout",
+          "button",
+          "ui"
+        ]
+      }
+    ]
+  },
+  "DUP_CHARGE_AGAIN": {
+    "incident_id": 1,
+    "user_message": "З картки зняли гроші двічі за замовлення 402",
+    "order_id": 402,
+    "user_id": 91,
+    "log_text": "2026-10-31T13:10:11.001Z INFO  [api-gateway] trace=t200 request_id=c3 POST /api/pay order=402 user=91\n2026-10-31T13:10:11.250Z INFO  [payment-service] trace=t200 request_id=c3 POST /api/pay order=402 -> 200 charged tx=TX-7 amount=340\n2026-10-31T13:10:12.150Z INFO  [api-gateway] trace=t201 request_id=d9 POST /api/pay order=402 user=91\n2026-10-31T13:10:12.420Z INFO  [payment-service] trace=t201 request_id=d9 POST /api/pay order=402 -> 200 charged tx=TX-8 amount=340\n2026-10-31T13:10:12.425Z WARN  [payment-service] trace=t201 order=402 header X-Idempotency-Key missing\n2026-10-31T12:40:05.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:06.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:07.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:08.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:09.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:10.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:11.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:12.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:13.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:14.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:15.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:16.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:17.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:18.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:19.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:20.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:21.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:22.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:23.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:24.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:25.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:26.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:27.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:28.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:29.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:30.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:31.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:32.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:33.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:34.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:35.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:36.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:37.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:38.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:39.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:40.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:41.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:42.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:43.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:44.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:45.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:46.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:47.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:48.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:49.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:50.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:51.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:52.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:53.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:54.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:55.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:56.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:57.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:58.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:59.000Z INFO [health-service] healthcheck ok\n",
+    "module_catalog": [
+      {
+        "id": "payments",
+        "name": "Платежі",
+        "description": "PaymentController і шлюз оплати",
+        "keywords": [
+          "pay",
+          "charge",
+          "refund",
+          "gateway",
+          "idempotency"
+        ]
+      },
+      {
+        "id": "orders",
+        "name": "Замовлення",
+        "description": "Статуси й життєвий цикл замовлень",
+        "keywords": [
+          "order",
+          "status",
+          "processing"
+        ]
+      },
+      {
+        "id": "promo",
+        "name": "Промокоди",
+        "description": "PromoService",
+        "keywords": [
+          "promo",
+          "discount",
+          "coupon"
+        ]
+      },
+      {
+        "id": "courier-integration",
+        "name": "Інтеграція з кур'єрами",
+        "description": "Зовнішнє API кур'єрської служби",
+        "keywords": [
+          "courier",
+          "dispatch",
+          "timeout"
+        ]
+      },
+      {
+        "id": "web-checkout",
+        "name": "Оформлення замовлення (фронт)",
+        "description": "Екран оформлення й оплати",
+        "keywords": [
+          "checkout",
+          "button",
+          "ui"
+        ]
+      }
+    ]
+  },
+  "PROMO_NPE": {
+    "incident_id": 1,
+    "user_message": "Промокод WELCOME10 не застосовується, пише помилку",
+    "order_id": 455,
+    "user_id": 12,
+    "log_text": "2026-10-31T14:02:10.100Z INFO  [promo-service] trace=t300 order=455 user=12 apply promo code=WELCOME10\n2026-10-31T14:02:10.130Z ERROR [promo-service] trace=t300 Unhandled exception while applying promo\njava.lang.NullPointerException: Cannot invoke \"Promo.getValidFrom()\" because \"promo\" is null\n\tat com.yummi.promo.PromoService.apply(PromoService.java:88)\n\tat com.yummi.promo.PromoController.apply(PromoController.java:41)\n\tat jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)\n2026-10-31T14:02:40.200Z INFO  [promo-service] trace=t301 order=460 user=14 apply promo code=WELCOME10\n2026-10-31T14:02:40.220Z ERROR [promo-service] trace=t301 Unhandled exception while applying promo\njava.lang.NullPointerException: Cannot invoke \"Promo.getValidFrom()\" because \"promo\" is null\n\tat com.yummi.promo.PromoService.apply(PromoService.java:88)\n\tat com.yummi.promo.PromoController.apply(PromoController.java:41)\n2026-10-31T14:03:12.400Z INFO  [promo-service] trace=t302 order=463 user=19 apply promo code=WELCOME10\n2026-10-31T14:03:12.415Z ERROR [promo-service] trace=t302 Unhandled exception while applying promo\njava.lang.NullPointerException: Cannot invoke \"Promo.getValidFrom()\" because \"promo\" is null\n\tat com.yummi.promo.PromoService.apply(PromoService.java:88)\n2026-10-31T12:40:15.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:16.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:17.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:18.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:19.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:20.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:21.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:22.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:23.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:24.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:25.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:26.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:27.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:28.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:29.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:30.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:31.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:32.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:33.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:34.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:35.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:36.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:37.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:38.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:39.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:40.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:41.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:42.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:43.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:44.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:45.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:46.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:47.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:48.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:49.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:50.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:51.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:52.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:53.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:54.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:55.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:56.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:57.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:58.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:59.000Z INFO [health-service] healthcheck ok\n",
+    "module_catalog": [
+      {
+        "id": "payments",
+        "name": "Платежі",
+        "description": "PaymentController і шлюз оплати",
+        "keywords": [
+          "pay",
+          "charge",
+          "refund",
+          "gateway",
+          "idempotency"
+        ]
+      },
+      {
+        "id": "orders",
+        "name": "Замовлення",
+        "description": "Статуси й життєвий цикл замовлень",
+        "keywords": [
+          "order",
+          "status",
+          "processing"
+        ]
+      },
+      {
+        "id": "promo",
+        "name": "Промокоди",
+        "description": "PromoService",
+        "keywords": [
+          "promo",
+          "discount",
+          "coupon"
+        ]
+      },
+      {
+        "id": "courier-integration",
+        "name": "Інтеграція з кур'єрами",
+        "description": "Зовнішнє API кур'єрської служби",
+        "keywords": [
+          "courier",
+          "dispatch",
+          "timeout"
+        ]
+      },
+      {
+        "id": "web-checkout",
+        "name": "Оформлення замовлення (фронт)",
+        "description": "Екран оформлення й оплати",
+        "keywords": [
+          "checkout",
+          "button",
+          "ui"
+        ]
+      }
+    ]
+  },
+  "COURIER_TIMEOUT": {
+    "incident_id": 1,
+    "user_message": "Замовлення 501 висить більше години, кур'єра немає",
+    "order_id": 501,
+    "user_id": 33,
+    "log_text": "2026-10-31T15:20:01.000Z INFO  [order-service] trace=t400 order=501 status=PROCESSING requesting courier\n2026-10-31T15:20:06.010Z WARN  [courier-client] trace=t400 order=501 connect timeout to courier-api.partner.example attempt=1\n2026-10-31T15:20:16.020Z WARN  [courier-client] trace=t400 order=501 connect timeout to courier-api.partner.example attempt=2\n2026-10-31T15:20:36.030Z WARN  [courier-client] trace=t400 order=501 connect timeout to courier-api.partner.example attempt=3\n2026-10-31T15:21:16.040Z ERROR [courier-client] trace=t400 order=501 courier-api.partner.example returned 503 after 3 retries\n2026-10-31T15:21:16.050Z ERROR [order-service] trace=t400 order=501 courier not assigned, stays PROCESSING\n2026-10-31T15:24:01.000Z ERROR [courier-client] trace=t405 order=507 courier-api.partner.example returned 503\n2026-10-31T12:40:07.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:08.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:09.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:10.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:11.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:12.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:13.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:14.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:15.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:16.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:17.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:18.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:19.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:20.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:21.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:22.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:23.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:24.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:25.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:26.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:27.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:28.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:29.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:30.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:31.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:32.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:33.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:34.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:35.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:36.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:37.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:38.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:39.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:40.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:41.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:42.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:43.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:44.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:45.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:46.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:47.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:48.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:49.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:50.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:51.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:52.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:53.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:54.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:55.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:56.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:57.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:58.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:59.000Z INFO [health-service] healthcheck ok\n",
+    "module_catalog": [
+      {
+        "id": "payments",
+        "name": "Платежі",
+        "description": "PaymentController і шлюз оплати",
+        "keywords": [
+          "pay",
+          "charge",
+          "refund",
+          "gateway",
+          "idempotency"
+        ]
+      },
+      {
+        "id": "orders",
+        "name": "Замовлення",
+        "description": "Статуси й життєвий цикл замовлень",
+        "keywords": [
+          "order",
+          "status",
+          "processing"
+        ]
+      },
+      {
+        "id": "promo",
+        "name": "Промокоди",
+        "description": "PromoService",
+        "keywords": [
+          "promo",
+          "discount",
+          "coupon"
+        ]
+      },
+      {
+        "id": "courier-integration",
+        "name": "Інтеграція з кур'єрами",
+        "description": "Зовнішнє API кур'єрської служби",
+        "keywords": [
+          "courier",
+          "dispatch",
+          "timeout"
+        ]
+      },
+      {
+        "id": "web-checkout",
+        "name": "Оформлення замовлення (фронт)",
+        "description": "Екран оформлення й оплати",
+        "keywords": [
+          "checkout",
+          "button",
+          "ui"
+        ]
+      }
+    ]
+  },
+  "AMBIGUOUS": {
+    "incident_id": 1,
+    "user_message": "Додаток працює повільно",
+    "order_id": null,
+    "user_id": 58,
+    "log_text": "2026-10-31T16:00:01.100Z INFO  [api-gateway] trace=t500 GET /api/menu -> 200 (1420ms)\n2026-10-31T16:00:05.200Z WARN  [api-gateway] trace=t501 GET /api/orders -> 200 (2210ms) slow response\n2026-10-31T16:00:09.300Z INFO  [api-gateway] trace=t502 GET /api/menu -> 200 (980ms)\n2026-10-31T16:00:14.400Z WARN  [api-gateway] trace=t503 GET /api/orders -> 200 (1890ms) slow response\n2026-10-31T16:00:20.500Z INFO  [api-gateway] trace=t504 GET /api/profile -> 200 (1100ms)\n2026-10-31T12:40:05.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:06.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:07.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:08.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:09.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:10.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:11.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:12.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:13.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:14.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:15.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:16.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:17.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:18.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:19.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:20.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:21.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:22.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:23.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:24.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:25.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:26.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:27.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:28.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:29.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:30.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:31.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:32.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:33.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:34.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:35.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:36.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:37.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:38.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:39.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:40.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:41.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:42.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:43.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:44.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:45.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:46.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:47.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:48.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:49.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:50.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:51.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:52.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:53.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:54.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:55.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:56.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:57.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:58.000Z INFO [health-service] healthcheck ok\n2026-10-31T12:40:59.000Z INFO [health-service] healthcheck ok\n",
+    "module_catalog": [
+      {
+        "id": "payments",
+        "name": "Платежі",
+        "description": "PaymentController і шлюз оплати",
+        "keywords": [
+          "pay",
+          "charge",
+          "refund",
+          "gateway",
+          "idempotency"
+        ]
+      },
+      {
+        "id": "orders",
+        "name": "Замовлення",
+        "description": "Статуси й життєвий цикл замовлень",
+        "keywords": [
+          "order",
+          "status",
+          "processing"
+        ]
+      },
+      {
+        "id": "promo",
+        "name": "Промокоди",
+        "description": "PromoService",
+        "keywords": [
+          "promo",
+          "discount",
+          "coupon"
+        ]
+      },
+      {
+        "id": "courier-integration",
+        "name": "Інтеграція з кур'єрами",
+        "description": "Зовнішнє API кур'єрської служби",
+        "keywords": [
+          "courier",
+          "dispatch",
+          "timeout"
+        ]
+      },
+      {
+        "id": "web-checkout",
+        "name": "Оформлення замовлення (фронт)",
+        "description": "Екран оформлення й оплати",
+        "keywords": [
+          "checkout",
+          "button",
+          "ui"
+        ]
+      }
+    ]
+  }
+}
