@@ -23,7 +23,7 @@ public class AiClient {
                     @Value("${fixer.ai.timeout-ms:30000}") int timeoutMs,
                     ObjectMapper mapper) {
         this.endpoint = baseUrl.replaceAll("/+$", "") + "/ai/analyze-log";
-        this.http = HttpClient.newBuilder().connectTimeout(Duration.ofMillis(Math.max(1, timeoutMs))).build();
+        this.http = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).connectTimeout(Duration.ofMillis(Math.max(1, timeoutMs))).build();
         this.mapper = mapper;
         this.timeoutMs = Math.max(1, timeoutMs);
     }
@@ -50,7 +50,7 @@ public class AiClient {
                     if (result == null || !result.isObject()) throw new AiClientException("AI returned an empty or non-object response");
                     return result;
                 }
-                AiClientException error = new AiClientException("AI service returned HTTP " + status);
+                AiClientException error = AiClientException.providerFailure("AI service returned HTTP " + status, safeProviderMessage(response.body()));
                 if (status < 500 || attempt == 1) throw error;
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
@@ -62,7 +62,29 @@ public class AiClient {
         throw new AiClientException("AI request failed after one retry");
     }
 
+    private String safeProviderMessage(String body) {
+        try {
+            String detail = mapper.readTree(body).path("detail").asText("");
+            return switch (detail) {
+                case "Gemini temporarily overloaded; try later or select another model" -> "Gemini тимчасово перевантажений. Повторіть пізніше або змініть модель у .env.";
+                case "Gemini quota or rate limit reached" -> "Вичерпано квоту Gemini або перевищено ліміт запитів.";
+                case "Gemini rejected the API key or its permissions" -> "Gemini відхилив ключ або його права доступу.";
+                case "Gemini model unavailable; check LLM_MODEL" -> "Обрана Gemini-модель недоступна. Перевірте LLM_MODEL у .env.";
+                case "Cannot connect to Gemini" -> "Немає з’єднання з Gemini.";
+                case "Gemini timeout" -> "Gemini не відповів вчасно.";
+                default -> null;
+            };
+        } catch (Exception ignored) { return null; }
+    }
+
     public static class AiClientException extends RuntimeException {
+        private String userMessage;
+        public String userMessage() { return userMessage; }
+        public static AiClientException providerFailure(String message, String safeMessage) {
+            var error = new AiClientException(message);
+            error.userMessage = safeMessage;
+            return error;
+        }
         public AiClientException(String message) { super(message); }
         public AiClientException(String message, Throwable cause) { super(message, cause); }
     }

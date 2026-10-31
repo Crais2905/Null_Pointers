@@ -18,3 +18,5 @@
 ```
 Скрипт використовує встановлений JDK 17 і Maven Wrapper 3.9.9. Перший запуск потребує інтернету для завантаження Maven/dependencies. Системний Maven не потрібен.
 Health: http://localhost:8080/api/health. Дані API поки визначає інтеграційна гілка Славіка.
+
+Для всієї системи використовуйте D:\hack1\start.cmd: він запускає також AI Gemini та React. Ключ — fixer/.env, GEMINI_API_KEY. Окрема конфігурація Fixer Backend запускає лише Java.

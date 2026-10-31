@@ -3,6 +3,7 @@ import ConfidenceBar from './ConfidenceBar';
 import { severityBadgeStyle } from './IncidentQueue';
 
 interface DiagnosisCardProps {
+  failed?: boolean;
   diagnosis?: Diagnosis | null;
   llmConfidence?: number | null;
   finalConfidence?: number | null;
@@ -11,6 +12,7 @@ interface DiagnosisCardProps {
 }
 
 export default function DiagnosisCard({
+  failed = false,
   diagnosis,
   llmConfidence,
   finalConfidence,
@@ -24,7 +26,7 @@ export default function DiagnosisCard({
           AI-Діагноз та докази
         </h3>
         <p className="mt-2 text-xs text-slate-500">
-          Діагноз ще формується або очікує завершення пайплайну...
+          {failed ? 'Діагноз не отримано через помилку AI-сервісу.' : 'Діагноз ще формується або очікує завершення пайплайну...'}
         </p>
       </div>
     );

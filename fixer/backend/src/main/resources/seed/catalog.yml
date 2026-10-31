@@ -1,6 +1,6 @@
 modules:
   - {id: payments, name: Платежі, description: PaymentController і шлюз оплати, keywords: [pay, charge, refund, gateway, idempotency]}
   - {id: orders, name: Замовлення, description: Статуси й життєвий цикл замовлень, keywords: [order, status, processing]}
-  - {id: promo, name: Промокоди, description: PromoService, застосування знижок, keywords: [promo, discount, coupon]}
+  - {id: promo, name: Промокоди, description: "PromoService, застосування знижок", keywords: [promo, discount, coupon]}
   - {id: courier-integration, name: Інтеграція з кур'єрами, description: Зовнішнє API кур'єрської служби, keywords: [courier, dispatch, timeout]}
   - {id: web-checkout, name: Оформлення замовлення (фронт), description: Екран оформлення й оплати, keywords: [checkout, button, ui]}

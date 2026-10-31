@@ -1,55 +1,24 @@
-# Fixer · AI-тріаж логів
-Скелет за новим ТЗ: React :5173 → Java 17 / Spring Boot / H2 :8080 → Python 3.11 / FastAPI :8000. Старі refund, Yummi та емоції не використовуються.
+# Fixer · AI-тріаж логів із Gemini
+React :5173 → Java 17+/Spring Boot/H2 :8080 → Python 3.11+/FastAPI/Gemini :8000.
 
-## Почати на Windows
-Передумови: Java 17, Maven 3.9+, Python 3.11+, Node.js 20.19+ з npm у PATH.
-```powershell
-cd D:\hack1\fixer
-./scripts/dev.ps1 setup
-./scripts/dev.ps1 up
-```
-Setup ставить залежності та копіює env-приклади. Ключ Claude для скелета не потрібен.
-Web http://localhost:5173 · Java http://localhost:8080/api/health · AI http://localhost:8000/health · OpenAPI http://localhost:8000/docs.
-Ctrl+C зупиняє launcher. Для окремої роботи запускайте потрібний сервіс у своєму терміналі:
-```powershell
-cd web
-npm run dev
-```
-```powershell
-cd backend
-mvn spring-boot:run
-```
-```powershell
-cd ai
-.venv/Scripts/python -m uvicorn app.main:app --port 8000 --reload
-```
-Для Linux/macOS: venv через python3.11, pip install -r requirements.txt, npm install; запускайте аналогічно з .venv/bin/python.
+## Запустити все
+З Git-кореня D:\hack1: **start.cmd** або `./start.ps1`.
+Усередині fixer/: `./scripts/dev.ps1 up` викликає той самий лаунчер.
+Перший запуск підготує залежності; ключ Gemini вставляється тільки в **fixer/.env**, поле GEMINI_API_KEY. REPLAY=auto обирає live за наявності ключа, інакше replay. Для стабільного офлайн-демо запускати `../start.ps1 -Replay`.
+На фронтенді обрано Java API, а не браузерні моки. Моки можна обрати перемикачем для окремої роботи над UI.
+
+## Gemini
+LLM_MODEL=gemini-3.5-flash-lite (можна змінити на доступну Gemini-модель). LLM_TIMEOUT_SECONDS=20. RECORD=1 записує лише валідовані масковані відповіді; REPLAY=0 примусово викликає Gemini, а без ключа повертає зрозумілу помилку.
+JSON-контракти не змінено. Розробника вибирає Java, не LLM. Сирі логи та verification_quote не потрапляють у Gemini: Python передає тільки масковані evidence pack/summary/findings і каталог.
+Демо-кеш синтетичний, не запис живого Gemini. При зміні prompt/schema/model/catalog його треба перебудувати: `ai/.venv/Scripts/python ai/scripts/build_demo_cache.py`.
+
+## Перевірка
+`../start.ps1 -Test` запускає Java/AI tests і frontend build. Відомі startup-проблеми усунено: Java AI client примусово HTTP/1.1, Uvicorn запускається з --http h11.
+Демо: DUP_CHARGE → DUP_CHARGE_AGAIN (одне завдання, occurrences=2); PROMO_NPE; COURIER_TIMEOUT; AMBIGUOUS → triage. Settings autoDispatch=false → confirm; Inbox підтримує ACK/DONE та Markdown.
 
 ## Docker
-`cp .env.example .env`, потім `docker compose up --build` або `make up`.
-AI кеш тепер усередині ai/, тому образ не залежить від contracts/ поза build context.
+З fixer/: скопіювати .env.example в .env (якщо ще немає), заповнити GEMINI_API_KEY або залишити порожнім для replay, `docker compose up --build`. Docker не потрібен для Windows start.cmd.
 
-## Що працює
-- Web: три стартові екрани; VITE_USE_MOCKS=true за замовчуванням, можна працювати без бекенду.
-- Java: health, read-stubs incidents/tasks/developers/modules/settings/metrics, Markdown фікстури. Це демо-дані, а не відправлене завдання.
-- AI: валідація запиту/відповіді та точний replay DUP_CHARGE (incident_id може змінюватись). Інші вхідні дані → 501.
-- П’ять demo logs по 60 рядків, синхронізація AI fixtures, перевірка реальних цитат у контракті.
-
-## Що команда реалізує
-Parser/masking/detectors/LLM, routing/evidence/policy/pipeline, REST integration та UI-компоненти. Data/JPA, seed/reset, atomic task dedup/dispatch, adapters і metrics вже реалізовані Миколою. Write endpoints поки 501, щоб не імітувати успішну роботу. Лише DUP_CHARGE має синтетичний replay; інші очікувані результати описані в ТЗ й потребують реалізації.
-Модель у .env.example взята з ТЗ; її доступність треба перевірити під час підключення реального провайдера.
-Ролі й перші кроки: docs/team.md. Спільні payload: contracts/README.md. Рішення для інтеграції зафіксовано в contracts/DECISIONS.md; Java interfaces у data/port/. Починайте реалізацію за ними.
-
-## Перевірки
-`./scripts/dev.ps1 test` — перевірка scaffold, Maven, pytest, TypeScript + Vite build.
-`python scripts/check_scaffold.py` — без зовнішніх залежностей: JSON, Python syntax, evidence, replay, однакові seed logs.
-`./scripts/dev.ps1 seed` — синхронізує логи; це не reset БД. API reset реалізує команда.
-Java pipeline/router/policy і Python бізнес-тести-заглушки явно disabled/skipped; data-dispatch інтеграційні тести реалізовані. Реальні початкові Python тести перевіряють схеми, межі confidence, точне replay.
-
-## Git
-Git-корінь — D:\hack1, код — fixer/. Кожен створює свою feature-гілку від свіжого main; PR у main.
-Гілки: feature/frontend, feature/data-dispatch, feature/pipeline-api, feature/ai-engine.
-CODEOWNERS — шаблон без реальних handles: заповніть після узгодження GitHub-імен.
-
-## Реалізація data-dispatch
-Частина Миколи реалізована в backend: JPA, seed/reset, log storage, atomic task dispatch/dedup, adapters, Markdown, metrics. Інтеграція зі Славіком: docs/mykola-handoff.md. Read-only ScaffoldController ще не підключений до цих сервісів; його замінює API-гілка.
+## Команда
+Олег — web/docs; Микола — data/dispatch/metrics/seed; В’ячеслав — REST/pipeline/evidence/routing/policy; Святослав — Python AI.
+Деталі: docs/team.md, docs/structure.md, contracts/DECISIONS.md.

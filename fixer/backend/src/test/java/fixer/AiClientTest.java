@@ -59,6 +59,32 @@ class AiClientTest {
         assertEquals(0, calls.get());
     }
 
+    @Test
+    void preservesOnlyKnownSafeProviderMessages() throws Exception {
+        startServer(exchange -> {
+            byte[] response = "{\"detail\":\"Gemini temporarily overloaded; try later or select another model\"}".getBytes(StandardCharsets.UTF_8);
+            exchange.sendResponseHeaders(503, response.length);
+            try (var body = exchange.getResponseBody()) { body.write(response); }
+        });
+        var error = assertThrows(AiClient.AiClientException.class,
+                () -> client().analyze(new ObjectMapper().createObjectNode()));
+        assertNotNull(error.userMessage());
+        assertTrue(error.userMessage().contains("Gemini"));
+    }
+
+    @Test
+    void doesNotExposeArbitraryProviderResponse() throws Exception {
+        startServer(exchange -> {
+            byte[] response = "{\"detail\":\"private-token-do-not-display\"}".getBytes(StandardCharsets.UTF_8);
+            exchange.sendResponseHeaders(503, response.length);
+            try (var body = exchange.getResponseBody()) { body.write(response); }
+        });
+        var error = assertThrows(AiClient.AiClientException.class,
+                () -> client().analyze(new ObjectMapper().createObjectNode()));
+        assertNull(error.userMessage());
+        assertFalse(error.getMessage().contains("private-token"));
+    }
+
     private AiClient client() {
         return new AiClient("http://localhost:" + server.getAddress().getPort(), 2_000, new ObjectMapper());
     }

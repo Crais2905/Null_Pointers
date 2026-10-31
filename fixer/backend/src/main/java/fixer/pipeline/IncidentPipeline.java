@@ -140,7 +140,9 @@ public class IncidentPipeline {
                 boolean unassignedDiagnosis = current != null && "DIAGNOSED".equals(current.path("status").asText())
                         && current.path("task").isNull();
                 if (!analysisStored || unassignedDiagnosis) {
-                    incidents.updateStatus(incidentId, "FAILED", "AI analysis failed");
+                    String reason = error instanceof AiClient.AiClientException aiError && aiError.userMessage() != null
+                            ? aiError.userMessage() : "AI analysis failed";
+                    incidents.updateStatus(incidentId, "FAILED", reason);
                     addStage(incidentId, stages, "DIAGNOSE", "FAILED", elapsedMs(started));
                 }
             } catch (Exception statusError) {

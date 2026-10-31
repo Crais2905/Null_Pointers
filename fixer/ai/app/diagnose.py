@@ -4,7 +4,7 @@ import os
 from pydantic import Field, ValidationError
 from .schemas import Model, Diagnosis, TaskDraft, Evidence
 from .masking import redact, mask_pii
-from .llm import call_llm, record, LlmTimeout, ReplayMiss
+from .llm import call_llm, record, LlmTimeout, ReplayMiss, LlmUnavailable
 
 class ModelEvidence(Model):
     line: int = Field(ge=1)
@@ -45,7 +45,7 @@ def diagnose(payload, raw_text):
             if os.getenv('RECORD','0') == '1' and os.getenv('REPLAY','1') != '1':
                 record(payload,schema,report.model_dump(mode='json'))
             break
-        except (LlmTimeout, ReplayMiss):
+        except (LlmTimeout, ReplayMiss, LlmUnavailable):
             raise
         except (ValidationError, ValueError, TypeError):
             continue

@@ -7,13 +7,13 @@ from .parser import parse_log, truncate
 from .detectors import detect
 from .evidence_pack import build_evidence_pack
 from .diagnose import diagnose
-from .llm import LlmTimeout, ReplayMiss
+from .llm import LlmTimeout, ReplayMiss, LlmUnavailable, replay_enabled, model_name
 
 app = FastAPI(title='Fixer log triage')
 
 @app.get('/health')
 def health():
-    return {'status':'ok'}
+    return {'status':'ok', 'provider':'gemini', 'mode':'replay' if replay_enabled() else 'live', 'model':model_name()}
 
 def prepare_analysis(req: AnalyzeRequest):
     started = perf_counter()
@@ -38,9 +38,11 @@ def analyze_log(req: AnalyzeRequest):
     try:
         diagnosis, draft = diagnose(payload,raw)
     except LlmTimeout:
-        raise HTTPException(504, 'LLM timeout')
+        raise HTTPException(504, 'Gemini timeout')
     except ReplayMiss:
-        raise HTTPException(503, 'No matching replay diagnosis')
+        raise HTTPException(503, 'No matching replay diagnosis; use a demo scenario or configure Gemini')
+    except LlmUnavailable as exc:
+        raise HTTPException(503, str(exc)) from None
     return AnalyzeResponse(parsed=Parsed(**summary,truncated=truncated,masked=counts),findings=findings,
         signature=signature,diagnosis=diagnosis,task_draft=draft,
         timings_ms={'parse':parse_ms,'detectors':detector_ms,'llm':round((perf_counter()-started)*1000)})

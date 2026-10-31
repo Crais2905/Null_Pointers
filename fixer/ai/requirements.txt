@@ -1,8 +1,8 @@
-# Runtime dependencies, verified on Python 3.14 (also supports Python 3.11+).
+# Runtime dependencies (Python 3.11+).
 fastapi==0.162.0
 uvicorn[standard]==0.54.0
 pydantic==2.14.2
-anthropic==2.3.0
+google-genai==2.34.0
 PyYAML==6.0.3
 
 # HTTP integration tests

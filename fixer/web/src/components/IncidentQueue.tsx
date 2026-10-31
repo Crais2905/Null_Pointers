@@ -143,7 +143,7 @@ export default function IncidentQueue({
                   </div>
 
                   <p className="mt-1.5 line-clamp-2 text-xs font-medium text-slate-800">
-                    {item.title ?? 'Аналіз триває...'}
+                    {item.title ?? (item.status === 'FAILED' ? 'Аналіз завершився помилкою' : 'Аналіз триває...')}
                   </p>
 
                   <div className="mt-2 flex items-center justify-between text-[11px] text-slate-500">

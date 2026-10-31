@@ -19,6 +19,11 @@ const MODE_STORAGE_KEY = 'fixer_api_mode'; // 'mock' | 'java'
 
 export function getApiMode(): 'mock' | 'java' {
   try {
+    const requested = new URLSearchParams(window.location.search).get('api');
+    if (requested === 'java' || requested === 'mock') {
+      localStorage.setItem(MODE_STORAGE_KEY, requested);
+      return requested;
+    }
     const saved = localStorage.getItem(MODE_STORAGE_KEY);
     if (saved === 'mock' || saved === 'java') return saved;
   } catch {
@@ -30,6 +35,9 @@ export function getApiMode(): 'mock' | 'java' {
 export function setApiMode(mode: 'mock' | 'java'): void {
   try {
     localStorage.setItem(MODE_STORAGE_KEY, mode);
+    const url = new URL(window.location.href);
+    url.searchParams.delete('api');
+    window.history.replaceState({}, '', url);
   } catch {
     // ignore
   }

@@ -108,6 +108,14 @@ class PipelineTest {
         verify(tasks, never()).dispatch(any());
     }
 
+    @Test
+    void preservesSafeGeminiFailureReasonForUi() {
+        when(ai.analyze(any())).thenThrow(AiClient.AiClientException.providerFailure("HTTP 503", "Gemini temporarily overloaded"));
+        pipeline.analyze(12);
+        verify(incidents).updateStatus(12, "FAILED", "Gemini temporarily overloaded");
+        verify(tasks, never()).dispatch(any());
+    }
+
     private JsonNode aiResponse(boolean validEvidence, boolean signatureKnown) throws Exception {
         String firstEvidence = validEvidence
                 ? "{\"line\":1,\"quote\":\"masked-address@example.test\",\"why\":\"first payment\",\"verification_quote\":\"email=private@example.com\"}"

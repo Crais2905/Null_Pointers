@@ -347,7 +347,7 @@ export default function Incident() {
               {/* Diagnosis & Findings Grid */}
               <div className="grid grid-cols-1 gap-4 xl:grid-cols-12">
                 <div className="xl:col-span-7 space-y-4">
-                  <DiagnosisCard
+                  <DiagnosisCard failed={incident.status === 'FAILED'}
                     diagnosis={incident.diagnosis}
                     llmConfidence={incident.llmConfidence}
                     finalConfidence={incident.finalConfidence}
