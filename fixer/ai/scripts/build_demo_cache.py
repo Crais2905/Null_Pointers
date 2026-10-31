@@ -67,10 +67,19 @@ def build():
 
         prepared = main.prepare_analysis(AnalyzeRequest.model_validate(request))
         capture(prepared[6], prepared[0])
+
+        legacy_catalog = [
+            {**m, 'description': 'PromoService'} if m.get('id') == 'promo' else dict(m)
+            for m in catalog
+        ]
+        legacy_req = {**request, 'module_catalog': legacy_catalog}
+        prepared_legacy = main.prepare_analysis(AnalyzeRequest.model_validate(legacy_req))
+        capture(prepared_legacy[6], prepared_legacy[0])
+
     # Also preserve the shared contract request as an independently keyed fixture.
     contract = json.loads((ROOT / 'contracts/ai-analyze-log.request.json').read_text(encoding='utf-8'))
-    name = 'DUP_CHARGE';
-    category, severity, confidence, module, skills, numbers, cause = configs[name];
+    name = 'DUP_CHARGE'
+    category, severity, confidence, module, skills, numbers, cause = configs[name]
     complaint = complaints[name]
     prepared = main.prepare_analysis(AnalyzeRequest.model_validate(contract))
     capture(prepared[6], prepared[0])
@@ -78,4 +87,5 @@ def build():
                                                     encoding='utf-8')
 
 
-if __name__ == '__main__': build()
+if __name__ == '__main__':
+    build()
