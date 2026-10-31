@@ -26,15 +26,18 @@ public class IncidentController {
     private final IncidentStore incidents;
     private final IncidentPipeline pipeline;
     private final SeedCatalog seed;
+    private final IncidentCommandService commands;
 
-    public IncidentController(IncidentStore incidents, IncidentPipeline pipeline, SeedCatalog seed) {
+    public IncidentController(IncidentStore incidents, IncidentPipeline pipeline, SeedCatalog seed, IncidentCommandService commands) {
         this.incidents = incidents;
         this.pipeline = pipeline;
         this.seed = seed;
+        this.commands = commands;
     }
 
     public record CreateIncidentRequest(String userMessage, String log, Long orderId, Long userId, String complaintAt) {}
     public record SimulateRequest(String scenario) {}
+    public record ConfirmRequest(String assigneeId) {}
     public record AcceptedResponse(long id, String status) {}
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -85,6 +88,16 @@ public class IncidentController {
     @GetMapping("/{id}")
     public JsonNode get(@PathVariable long id) {
         return incidents.find(id).orElseThrow(() -> DataException.missing("Incident"));
+    }
+
+    @PostMapping("/{id}/confirm")
+    public JsonNode confirm(@PathVariable long id, @RequestBody(required = false) ConfirmRequest request) {
+        return commands.confirm(id, request == null ? null : request.assigneeId());
+    }
+
+    @PostMapping("/{id}/dismiss")
+    public JsonNode dismiss(@PathVariable long id) {
+        return commands.dismiss(id);
     }
 
     private ResponseEntity<AcceptedResponse> accept(IncidentStore.Submission submission) {

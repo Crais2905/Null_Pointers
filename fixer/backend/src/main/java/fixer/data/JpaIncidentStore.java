@@ -72,6 +72,11 @@ public class JpaIncidentStore implements IncidentStore {
         return repo.findById(id).map(this::view);
     }
 
+    @Transactional(readOnly = true)
+    public Optional<String> fingerprint(long id) {
+        return repo.findById(id).map(i -> i.fingerprint).filter(Objects::nonNull);
+    }
+
     private JsonNode view(Incident i) {
         var n = json.object();
         n.put("id", i.id);
