@@ -25,6 +25,7 @@ class Evidence(Model):
     line: int = Field(ge=1)
     quote: str = Field(max_length=200)
     why: str
+    verification_quote: str = Field(max_length=200)
 class Diagnosis(Model):
     category: Literal['PAYMENT_DUPLICATE','UNHANDLED_EXCEPTION','UPSTREAM_TIMEOUT','AUTH_FAILURE','DATA_INCONSISTENCY','CONFIG_ERROR','UNKNOWN']
     severity: Literal['P1','P2','P3']

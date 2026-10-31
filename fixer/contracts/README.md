@@ -9,3 +9,5 @@ PATCH task → повний task; GET tasks → масив; GET modules → ма
 GET tasks/{id}.md → text/markdown, не JSON.
 AI replay працює лише для contract request, зі змінним incident_id; інший payload → 501. Кеш синтетичний, не запис реального Claude.
 
+
+Остаточні правила інтеграції: DECISIONS.md (має пріоритет для уточнень). Java ports — backend/.../data/port/. AI evidence.verification_quote обов’язкове лише у внутрішньому AI→Java контракті; назовні його немає. api-task має status OPEN/ACK/DONE.

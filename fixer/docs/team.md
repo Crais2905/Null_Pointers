@@ -6,17 +6,13 @@
 | В’ячеслав | backend/.../api, pipeline, evidence, routing, policy, ai, audit; Java tests | DTO, EvidenceVerifier, Router, R1–R6, fingerprint, дедуп, IncidentPipeline, AiClient |
 | Святослав | ai/ | Маскування PII, parser, D1–D7, evidence pack, diagnose, replay, pytest |
 
-## Перші спільні домовленості
-1. Микола + Славік: погодити JPA/repository API, TaskSink, LogStorage; хто і в якій транзакції створює dev_task й audit.
-2. Святослав + Славік: contracts/ai-analyze-log.*; snake_case усередині, camelCase назовні.
-3. Олег + Славік: rawLog у GET incident додано для LogViewer; logLines залишається числом. RawLog не відправляти зовнішнім webhook; для доставки використовувати масковані докази.
-4. Зміни contracts/ через малий PR із повідомленням усім.
+## Спільні рішення вже зафіксовані
+Читайте contracts/DECISIONS.md і backend/src/main/java/fixer/data/port/README.md перед початком. Додаткове погодження для старту не потрібне.
 
-## Межі й критерії
-- Микола: БД + seed + доставка + metrics; без скорингу й промптів. Webhook помилка не відкочує Inbox, реальну відправку реалізувати окремо.
-- Славік: Java вибирає людину, перевіряє цитати по оригінальних рядках, обмежує confidence і виконує R1–R6 у правильному порядку.
-- Святослав: LLM лише один виклик для діагнозу; ніколи не обирає дева; до LLM усі PII маскуються. Масковані цитати й перевірку по raw погодити зі Славіком, щоб PII не ламали evidence.
-- Олег: фронт ходить лише в Java, мок-режим незалежний; фінальні статуси припиняють polling.
+- Микола реалізує порти data/port/, JPA/repos, seed, LogStorage, TaskStore.dispatch, TaskSink adapters та metrics.
+- Славік використовує ці порти, реалізує API/DTO, pipeline, evidence, routing, policy, AiClient й audit orchestration.
+- Святослав реалізує AI за schemas.py; evidence.verification_quote додає локально після LLM, ніколи не передає в LLM.
+- Олег працює на mocks; реалізує UI за contracts/ і переключає VITE_USE_MOCKS=false для інтеграції.
 
-Невирішена деталь ТЗ: UNIQUE TASK:{fingerprint} назавжди конфліктує з можливістю нового завдання після DONE. Перш ніж реалізувати, погодити lifecycle: чи reopening існуючого, чи окремий ключ для нового покоління. У скелеті поведінка не вигадана.
-Тести-заглушки позначено skipped/disabled; це не готові перевірки продукту.
+Нестиковки ТЗ щодо повторного task після DONE, атомарності dispatch, PII evidence й форматів API вирішені в DECISIONS.md. Зміни спільних контрактів надалі робити additive через PR.
+Тести-заглушки disabled/skipped: це не реалізація продуктових перевірок.

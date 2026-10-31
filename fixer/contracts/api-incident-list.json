@@ -1,0 +1,13 @@
+[
+  {
+    "id": 12,
+    "status": "AUTO_DISPATCHED",
+    "title": "[payments] Duplicate charge",
+    "severity": "P1",
+    "assignee": {
+      "id": "dev-1",
+      "name": "Андрій Коваль"
+    },
+    "createdAt": "2026-10-31T12:30:00Z"
+  }
+]

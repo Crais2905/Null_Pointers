@@ -38,7 +38,7 @@ AI кеш тепер усередині ai/, тому образ не залеж
 ## Що команда реалізує
 БД/JPA, сідер, parser/masking/detectors/LLM, routing/evidence/policy/pipeline, dedup, dispatch, реальні metrics, UI-компоненти. Write endpoints поки 501, щоб не імітувати успішну роботу. Лише DUP_CHARGE має синтетичний replay; інші очікувані результати описані в ТЗ й потребують реалізації.
 Модель у .env.example взята з ТЗ; її доступність треба перевірити під час підключення реального провайдера.
-Ролі й перші кроки: docs/team.md. Спільні payload: contracts/README.md. Не змінюйте інтерфейси без узгодження з колегою.
+Ролі й перші кроки: docs/team.md. Спільні payload: contracts/README.md. Рішення для інтеграції зафіксовано в contracts/DECISIONS.md; Java interfaces у data/port/. Починайте реалізацію за ними.
 
 ## Перевірки
 `./scripts/dev.ps1 test` — перевірка scaffold, Maven, pytest, TypeScript + Vite build.

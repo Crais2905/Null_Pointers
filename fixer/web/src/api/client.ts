@@ -1,8 +1,9 @@
+import summaries from './mocks/api-incident-list.json';
 import incident from './mocks/incident.mock.json';
 import developers from './mocks/api-developers.json';
 import task from './mocks/api-task.json';
 import metrics from './mocks/api-metrics.json';
-import type { Incident } from './types';
+import type { Incident, IncidentSummary } from './types';
 const BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:8080';
 export const USE_MOCKS = import.meta.env.VITE_USE_MOCKS !== 'false';
 async function req<T>(path: string, init?: RequestInit): Promise<T> {
@@ -16,7 +17,7 @@ function pending<T>(): Promise<T> { return Promise.reject(new Error('Мок: д�
 export const api = {
  createIncident: (b: unknown) => USE_MOCKS ? pending() : req('/api/incidents',{method:'POST',body:JSON.stringify(b)}),
  uploadIncident: (b: FormData) => USE_MOCKS ? pending() : req('/api/incidents',{method:'POST',body:b}),
- listIncidents: () => USE_MOCKS ? Promise.resolve([incident as Incident]) : req<Incident[]>('/api/incidents'),
+ listIncidents: () => USE_MOCKS ? Promise.resolve(summaries as IncidentSummary[]) : req<IncidentSummary[]>('/api/incidents'),
  getIncident: (id: number) => USE_MOCKS ? Promise.resolve(incident as Incident) : req<Incident>(`/api/incidents/${id}`),
  confirm: (id: number, assigneeId?: string) => USE_MOCKS ? pending() : req(`/api/incidents/${id}/confirm`,{method:'POST',body:JSON.stringify({assigneeId})}),
  dismiss: (id: number) => USE_MOCKS ? pending() : req(`/api/incidents/${id}/dismiss`,{method:'POST'}),

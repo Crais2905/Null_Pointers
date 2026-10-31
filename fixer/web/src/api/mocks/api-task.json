@@ -6,5 +6,6 @@
   "backupId": "dev-2",
   "occurrences": 1,
   "bodyMd": "## Демо-фікстура\nЗавдання не було реально відправлено.",
-  "deliveryStatus": "IN_APP"
+  "deliveryStatus": "IN_APP",
+  "status": "OPEN"
 }

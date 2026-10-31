@@ -16,3 +16,5 @@ export interface Incident {
   dedupOf: number | null; pipelineSeconds?: number;
   auditLog: { ts: string; actor: "SYSTEM" | "AI" | "HUMAN"; event: string }[];
 }
+
+export interface IncidentSummary { id: number; status: IncidentStatus; title: string | null; severity: Severity | null; assignee: {id: string; name: string} | null; createdAt: string }

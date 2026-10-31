@@ -46,12 +46,14 @@
       {
         "line": 4,
         "quote": "trace=t101 request_id=a1 POST /api/pay order=318 -> 200 charged tx=TX-1 amount=289",
-        "why": "перше успішне списання"
+        "why": "перше успішне списання",
+        "verification_quote": "trace=t101 request_id=a1 POST /api/pay order=318 -> 200 charged tx=TX-1 amount=289"
       },
       {
         "line": 6,
         "quote": "trace=t102 request_id=b7 POST /api/pay order=318 -> 200 charged tx=TX-2 amount=289",
-        "why": "друге списання через 0.9 с"
+        "why": "друге списання через 0.9 с",
+        "verification_quote": "trace=t102 request_id=b7 POST /api/pay order=318 -> 200 charged tx=TX-2 amount=289"
       }
     ],
     "repro_steps": [

@@ -17,7 +17,7 @@ public class ScaffoldController {
   try(var in = new ClassPathResource(path).getInputStream()) { return mapper.readTree(in); }
  }
  @GetMapping("/health") public Map<String,String> health(){return Map.of("status","ok","mode","scaffold");}
- @GetMapping("/incidents") public List<JsonNode> incidents() throws IOException {return List.of(load("fixtures/api-incident.json",json));}
+ @GetMapping("/incidents") public List<JsonNode> incidents() throws IOException {return json.convertValue(load("fixtures/api-incident-list.json",json), new com.fasterxml.jackson.core.type.TypeReference<List<JsonNode>>() {});}
  @GetMapping("/incidents/{id}") public JsonNode incident(@PathVariable long id) throws IOException {
   if(id!=12) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
   return load("fixtures/api-incident.json",json);
