@@ -1,5 +1,4 @@
 # Fixer · AI-тріаж логів
-Скелет за новим ТЗ: React :5173 → Java 17 / Spring Boot / H2 :8080 → Python 3.11 / FastAPI :8000. Старі refund, Yummi та емоції не використовуються.
 
 ## Почати на Windows
 Передумови: Java 17, Maven 3.9+, Python 3.11+, Node.js 20.19+ з npm у PATH.
@@ -35,21 +34,4 @@ AI кеш тепер усередині ai/, тому образ не залеж
 - AI: валідація запиту/відповіді та точний replay DUP_CHARGE (incident_id може змінюватись). Інші вхідні дані → 501.
 - П’ять demo logs по 60 рядків, синхронізація AI fixtures, перевірка реальних цитат у контракті.
 
-## Що команда реалізує
-Parser/masking/detectors/LLM, routing/evidence/policy/pipeline, REST integration та UI-компоненти. Data/JPA, seed/reset, atomic task dedup/dispatch, adapters і metrics вже реалізовані Миколою. Write endpoints поки 501, щоб не імітувати успішну роботу. Лише DUP_CHARGE має синтетичний replay; інші очікувані результати описані в ТЗ й потребують реалізації.
-Модель у .env.example взята з ТЗ; її доступність треба перевірити під час підключення реального провайдера.
-Ролі й перші кроки: docs/team.md. Спільні payload: contracts/README.md. Рішення для інтеграції зафіксовано в contracts/DECISIONS.md; Java interfaces у data/port/. Починайте реалізацію за ними.
 
-## Перевірки
-`./scripts/dev.ps1 test` — перевірка scaffold, Maven, pytest, TypeScript + Vite build.
-`python scripts/check_scaffold.py` — без зовнішніх залежностей: JSON, Python syntax, evidence, replay, однакові seed logs.
-`./scripts/dev.ps1 seed` — синхронізує логи; це не reset БД. API reset реалізує команда.
-Java pipeline/router/policy і Python бізнес-тести-заглушки явно disabled/skipped; data-dispatch інтеграційні тести реалізовані. Реальні початкові Python тести перевіряють схеми, межі confidence, точне replay.
-
-## Git
-Git-корінь — D:\hack1, код — fixer/. Кожен створює свою feature-гілку від свіжого main; PR у main.
-Гілки: feature/frontend, feature/data-dispatch, feature/pipeline-api, feature/ai-engine.
-CODEOWNERS — шаблон без реальних handles: заповніть після узгодження GitHub-імен.
-
-## Реалізація data-dispatch
-Частина Миколи реалізована в backend: JPA, seed/reset, log storage, atomic task dispatch/dedup, adapters, Markdown, metrics. Інтеграція зі Славіком: docs/mykola-handoff.md. Read-only ScaffoldController ще не підключений до цих сервісів; його замінює API-гілка.
